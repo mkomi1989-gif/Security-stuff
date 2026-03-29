@@ -1,32 +1,31 @@
 failed_attempts = {}
 threshold = 5
 
-
-def check_login(username, is_failed):
+def check_login(username, login_fail):
     global failed_attempts
 
     if username not in failed_attempts:
         failed_attempts[username] = 0
     
-    if is_failed:
+    if login_fail:
         failed_attempts[username] += 1
     else:
         failed_attempts[username] = 0
+        return "Login Successful. Attempts reset to 0"
     
     if failed_attempts[username] >= threshold:
-        return f"Your account is currently locked. Failed Attempts: {failed_attempts[username]}"
-    elif failed_attempts[username] == 3:
-        return f"Warning. {failed_attempts[username]} number of attempts"
+        return f"Your account has been locked. Failed Attempts: {failed_attempts[username]}"
+    elif failed_attempts == 3:
+        return f"Warning. {failed_attempts[username]} failed login attempts detected"
     else:
-        return "Safe"
-    
-print(check_login("Melly12", True))
-print(check_login("Melly12", True))
-print(check_login("Melly12", True))
-print(check_login("Melly12", True))
-print(check_login("Melly12", True))
-print(check_login("Melly12", True))
-print(check_login("Melly12", False))
+        return f"Safe. Failed attempts: {failed_attempts[username]}"
 
+
+print(check_login("Melly23", True))
+print(check_login("Melly23", True))
+print(check_login("Melly23", True))
+print(check_login("Melly23", True))
+print(check_login("Melly23", True))
+print(check_login("Melly23", False))
 
 
