@@ -1,6 +1,7 @@
 failed_attempts = {}
 threshold = 5
 total_failed_attempts = 0
+total_successful_attempts = 0
 
 
 def check_ip_logins(ip_address, is_failed): 
@@ -45,10 +46,13 @@ with open("ips.txt") as file:
 
         if is_failed:
             total_failed_attempts += 1
+        else:
+            total_successful_attempts += 1
             
         result = check_ip_logins(ip_address, is_failed)
         print(f"{ip_address}: {result}")
         print(f"Total failed attempts: {total_failed_attempts}")
+        print(f"Total successful attempts: {total_successful_attempts}")
 
     
     
